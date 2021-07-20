@@ -5,10 +5,19 @@ import { Navbar, Nav, Container } from "react-bootstrap";
 const Header = () => {
   return (
     <header>
-      <Navbar bg='dark' variant='dark' expand='lg' collapseOnSelect>
+      <Navbar bg='info' variant='dark' expand='lg' collapseOnSelect>
         <Container>
           <LinkContainer to='/'>
-            <Navbar.Brand>ProShop</Navbar.Brand>
+            <Navbar.Brand>
+              Expatologist{" "}
+              <img
+                src='/nav_bar_logo.png'
+                width='30'
+                height='30'
+                className='d-inline-block align-top'
+                alt='brain logo'
+              />
+            </Navbar.Brand>
           </LinkContainer>
           <Navbar.Toggle aria-controls='basic-navbar-nav' />
           <Navbar.Collapse id='basic-navbar-nav'>

@@ -9,3 +9,14 @@ h3 {
 .rating span {
   margin: 0.1rem;
 }
+
+footer i{
+  margin: 0.2rem;
+  color: white;
+}
+
+footer{
+  background-color: #57837B;
+  padding: 1rem 0;
+  color: white;
+}

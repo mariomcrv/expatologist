@@ -1,12 +1,21 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom"; // the link function
 import { Row, Col, Image, ListGroup, Card, Button } from "react-bootstrap"; // more bootstrap components
 import Rating from "../components/Rating"; // our rating component
-import products from "../products"; // this is the dummy database
-import Product from "../components/Product";
+import axios from "axios";
 
 const ProductScreen = ({ match }) => {
-  const product = products.find((p) => p._id === match.params.id);
+  const [product, setProduct] = useState({});
+
+  useEffect(() => {
+    const fetchProduct = async () => {
+      const { data } = await axios.get(`/api/products/${match.params.id}`);
+
+      setProduct(data);
+    };
+
+    fetchProduct();
+  }, [match]);
 
   return (
     <>
@@ -14,10 +23,10 @@ const ProductScreen = ({ match }) => {
         Go Back
       </Link>
       <Row>
-        <Col md={6}>
+        <Col md={4}>
           <Image src={product.image} alt={product.name} fluid></Image>
         </Col>
-        <Col md={3}>
+        <Col md={5}>
           <ListGroup variant='flush'>
             <ListGroup.Item>
               <h3>{product.name}</h3>
