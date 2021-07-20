@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom"; // the link function
+import { Link } from "react-router-dom"; // the link function to move to another route
 import { Row, Col, Image, ListGroup, Card, Button } from "react-bootstrap"; // more bootstrap components
 import Rating from "../components/Rating"; // our rating component
 import axios from "axios";
@@ -30,6 +30,7 @@ const ProductScreen = ({ match }) => {
           <ListGroup variant='flush'>
             <ListGroup.Item>
               <h3>{product.name}</h3>
+              <h5>{product.brand} | {product.category}</h5>
             </ListGroup.Item>
             <ListGroup.Item>
               <Rating
@@ -37,8 +38,8 @@ const ProductScreen = ({ match }) => {
                 text={`${product.numReviews} reviews`}
               />
             </ListGroup.Item>
-            <ListGroup.Item>Price: ${product.price}</ListGroup.Item>
-            <ListGroup.Item>Description: ${product.description}</ListGroup.Item>
+            <ListGroup.Item>Price: €{product.price}</ListGroup.Item>
+            <ListGroup.Item>Description: {product.description}</ListGroup.Item>
           </ListGroup>
         </Col>
         <Col md={3}>
@@ -48,7 +49,7 @@ const ProductScreen = ({ match }) => {
                 <Row>
                   <Col>Price:</Col>
                   <Col>
-                    <strong>${product.price}</strong>
+                    <strong>€{product.price}</strong>
                   </Col>
                 </Row>
               </ListGroup.Item>
