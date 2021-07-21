@@ -4,7 +4,12 @@ import {
   PRODUCT_LIST_REQUEST,
   PRODUCT_LIST_SUCCESS,
   PRODUCT_LIST_FAIL,
+  PRODUCT_DETAILS_REQUEST,
+  PRODUCT_DETAILS_SUCCESS,
+  PRODUCT_DETAILS_FAIL,
 } from "../constants/productConstants";
+
+// -- THERAPIST LIST REDUCER --
 
 export const productListReducer = (state = { products: [] }, action) => {
   switch (action.type) {
@@ -19,7 +24,25 @@ export const productListReducer = (state = { products: [] }, action) => {
   }
 };
 
+// -- THERAPIST DETAILS REDUCER --
+
+export const productDetailsReducer = (
+  state = { product: { reviews: [] } },
+  action
+) => {
+  switch (action.type) {
+    case PRODUCT_DETAILS_REQUEST:
+      return { loading: true, ...state }; // whatever is in the state, will be spreaded, same as sending an empty object 
+    case PRODUCT_DETAILS_SUCCESS:
+      return { loading: false, product: action.payload }; 
+    case PRODUCT_DETAILS_FAIL:
+      return { loading: false, error: action.payload };
+    default:
+      return state; // default case, just return the state
+  }
+};
+
 // we need to add this to the store
-// no need to delcate the export default
+// no need to declare the export default
 // we already did it when we declared the function above, check line 4
 // IMPORTANT. Remember import the reducers in the store.js

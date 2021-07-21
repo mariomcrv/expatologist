@@ -7,10 +7,11 @@
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
-import { productListReducer } from "./reducers/productReducers";
+import { productListReducer, productDetailsReducer } from "./reducers/productReducers";
 
 const reducer = combineReducers({
-    productList: productListReducer
+    productList: productListReducer,
+    productDetails: productDetailsReducer
 }); // here we pass our reducers, check it is formatted as an object
 
 const initialState = {}; // what is loaded from the beginning
@@ -26,3 +27,5 @@ const store = createStore(
 );
 
 export default store;
+
+// make sure for every reducer, there is an action

@@ -13,7 +13,7 @@ const HomeScreen = () => {
 
   useEffect(() => { // here we fire off the action to get the info and put it in the state
     //we put the function in useEffect, it does the request to the backend to get the list of therapists
-    dispatch(listProducts()); //dispatch the action
+    dispatch(listProducts()); //dispatch the action, we do not need to pass any arguments
   }, [dispatch]); //we put the dispatch dependency to avoid errors in the console
 
 
@@ -24,7 +24,7 @@ const HomeScreen = () => {
   // else, load the components
   return (
     <>
-      <h1>Counsellors</h1>
+      <h1>International Counsellors 🌍</h1>
       {loading ? (
         <Spinner animation="grow" variant="primary" />
       ) : error ? (

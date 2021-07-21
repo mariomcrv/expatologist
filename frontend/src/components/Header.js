@@ -9,14 +9,15 @@ const Header = () => {
         <Container>
           <LinkContainer to='/'>
             <Navbar.Brand>
-              Expatologist{" "}
+              {" "}
               <img
                 src='/nav_bar_logo.png'
                 width='30'
                 height='30'
                 className='d-inline-block align-top'
                 alt='brain logo'
-              />
+              />{" "}
+              Expatologist
             </Navbar.Brand>
           </LinkContainer>
           <Navbar.Toggle aria-controls='basic-navbar-nav' />
