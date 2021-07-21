@@ -12,6 +12,7 @@ import {
 } from "react-bootstrap"; // more bootstrap components
 import Rating from "../components/Rating"; // our rating component
 import { listProductDetails } from "../actions/productActions";
+import DateTimePicker from "../components/DateTimePicker";
 
 const ProductScreen = ({ match }) => { // this is how we use the match property comming from props
   const dispatch = useDispatch();
@@ -75,6 +76,9 @@ const ProductScreen = ({ match }) => { // this is how we use the match property 
                       {product.countInStock > 0 ? "In Stock" : "Out Of Stock"}
                     </Col>
                   </Row>
+                </ListGroup.Item>
+                <ListGroup.Item>
+                  <DateTimePicker />
                 </ListGroup.Item>
                 <ListGroup.Item>
                   <Button
