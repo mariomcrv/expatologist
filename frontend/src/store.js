@@ -12,11 +12,14 @@ import {
   productDetailsReducer,
 } from "./reducers/productReducers";
 import { cartReducer } from "./reducers/cartReducers";
+import { userLoginReducer, userRegisterReducer } from "./reducers/userReducers";
 
 const reducer = combineReducers({
   productList: productListReducer,
   productDetails: productDetailsReducer,
   cart: cartReducer,
+  userLogin: userLoginReducer,
+  userRegister: userRegisterReducer,
 }); // here we pass our reducers, check it is formatted as an object
 
 // with this const we can bring the content from cart in our localstorage, parse it into a string and put it into my initial state
@@ -24,8 +27,14 @@ const cartItemsFromStorage = localStorage.getItem("cartItems")
   ? JSON.parse(localStorage.getItem("cartItems"))
   : [];
 
+// with this constant I can retrieve the content from the local storage
+const userInfoFromStorage = localStorage.getItem("userInfo")
+  ? JSON.parse(localStorage.getItem("userInfo"))
+  : null;
+
 const initialState = {
-  cart: {cartItems: cartItemsFromStorage}
+  cart: { cartItems: cartItemsFromStorage },
+  userLogin: { userInfo: userInfoFromStorage },
 }; // what is loaded from the beginning
 
 const middleware = [thunk]; // at the moment, thunk is the middleware I will use
