@@ -1,9 +1,11 @@
 import React from "react";
+import { Route } from "react-router-dom";
 // To bring info from the redux state, I need to import dispatch and selector
 import { useDispatch, useSelector } from "react-redux";
 import { LinkContainer } from "react-router-bootstrap";
 import { Navbar, Nav, Container, NavDropdown } from "react-bootstrap";
 import { logout } from "../actions/userActions";
+import SearchBox from "./SearchBox";
 
 const Header = () => {
   // dispatch the logout function
@@ -17,7 +19,7 @@ const Header = () => {
 
   // LOGOUT HANDLER
   const logoutHandler = () => {
-    dispatch(logout())
+    dispatch(logout());
   };
 
   return (
@@ -39,6 +41,7 @@ const Header = () => {
           </LinkContainer>
           <Navbar.Toggle aria-controls='basic-navbar-nav' />
           <Navbar.Collapse id='basic-navbar-nav'>
+            <Route render={({ history }) => <SearchBox history={history} />} />
             <Nav className='ml-auto'>
               <LinkContainer to='/cart'>
                 <Nav.Link>
@@ -46,12 +49,9 @@ const Header = () => {
                 </Nav.Link>
               </LinkContainer>
               {userInfo ? (
-                <NavDropdown
-                  title={userInfo.name}
-                  id='username'
-                >
-                  <LinkContainer to='/profile'>
-                    <NavDropdown.Item>Profile</NavDropdown.Item>
+                <NavDropdown title={userInfo.name} id='username'>
+                  <LinkContainer to='/orders'>
+                    <NavDropdown.Item>My Bookings</NavDropdown.Item>
                   </LinkContainer>
                   <NavDropdown.Item onClick={logoutHandler}>
                     Logout
@@ -63,6 +63,13 @@ const Header = () => {
                     <i className='fas fa-user'></i>Sign in or Register
                   </Nav.Link>
                 </LinkContainer>
+              )}
+              {userInfo && userInfo.isAdmin && (
+                <NavDropdown title='Admin' id='adminmenu'>
+                  <LinkContainer to='/admin/productlist'>
+                    <NavDropdown.Item>Counsellors</NavDropdown.Item>
+                  </LinkContainer>
+                </NavDropdown>
               )}
             </Nav>
           </Navbar.Collapse>

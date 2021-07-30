@@ -6,8 +6,12 @@
 import express from "express"; // this is how to import here
 import dotenv from "dotenv";
 import connectDB from "./config/db.js"; // this is the module we created to connect with the DB
+
 import productRoutes from "./routes/productRoutes.js"; // this is how we make us of this module
 import userRoutes from "./routes/userRoutes.js"; // import of the userRoutes
+import orderRoutes from "./routes/orderRoutes.js"; // import of the userRoutes
+
+
 import { notFound, errorHandler } from "./middleWare/errorMiddleware.js";
 
 dotenv.config(); // We run this method of dotenv to load the content
@@ -26,6 +30,10 @@ app.get("/", (req, res) => {
 
 // this app.use completes the http call with whatever is in productRoutes.js
 app.use("/api/products", productRoutes);
+
+// --ORDER ROUTES
+// this app.se calls the function in the orderRotues files to create an order in the DB
+app.use("/api/orders", orderRoutes);
 
 // -- USER ROUTES
 app.use('/api/users', userRoutes)

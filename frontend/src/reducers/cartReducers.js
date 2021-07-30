@@ -1,4 +1,8 @@
-import { CART_ADD_ITEM, CART_REMOVE_ITEM } from "../constants/cartConstants";
+import {
+  CART_ADD_ITEM,
+  CART_REMOVE_ITEM,
+  CART_CLEAR_ITEMS,
+} from "../constants/cartConstants";
 
 export const cartReducer = (
   state = {
@@ -26,11 +30,17 @@ export const cartReducer = (
         };
       }
 
-    // this case remover the item matching the payload from the cart
+    // this case removes the item matching the payload from the cart
     case CART_REMOVE_ITEM:
       return {
         ...state,
         cartItems: state.cartItems.filter((x) => x.product !== action.payload),
+      };
+      // this function removes the content from the cart and sets an empty array
+    case CART_CLEAR_ITEMS:
+      return {
+        ...state,
+        cartItems: [],
       };
 
     default:

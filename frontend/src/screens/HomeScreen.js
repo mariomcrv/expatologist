@@ -1,11 +1,15 @@
 import React from "react";
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { useEffect } from "react"; // hook
 import { useDispatch, useSelector } from "react-redux"; // usedispatch to call our actions and useSelector to select parts of the state
 import { Row, Col, Spinner } from "react-bootstrap"; //Bootsrap dependencies
 import Product from "../components/Product"; // component
 import { listProducts } from "../actions/productActions"; // need to call our action
 
-const HomeScreen = () => {
+const HomeScreen = ({match}) => {
+
+  const keyword = match.params.keyword
+
   const dispatch = useDispatch(); // this var will keep the hook useDispatch
 
   const productList = useSelector((state) => state.productList); // useSelector allows us to grab info from the state once the action is fired off
@@ -13,8 +17,8 @@ const HomeScreen = () => {
 
   useEffect(() => { // here we fire off the action to get the info and put it in the state
     //we put the function in useEffect, it does the request to the backend to get the list of therapists
-    dispatch(listProducts()); //dispatch the action, we do not need to pass any arguments
-  }, [dispatch]); //we put the dispatch dependency to avoid errors in the console
+    dispatch(listProducts(keyword)); //dispatch the action, we do not need to pass any arguments
+  }, [dispatch, keyword]); //we put the dispatch dependency to avoid errors in the console
 
 
   // I made some changes in the code below. We can diplay a spinner or a message

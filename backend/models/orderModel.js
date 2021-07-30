@@ -17,9 +17,11 @@ const orderSchema = mongoose.Schema(
     orderItems: [
       {
         name: { type: String, required: true }, 
-        qty: { type: Number, required: true },
+        qty: { type: Number, required: false },
         image: { type: String, required: true },
         price: { type: Number, required: true },
+        date: {type: String},
+        time: {type: String},
         product: {
           type: mongoose.Schema.Types.ObjectId,
           required: true,
@@ -28,14 +30,14 @@ const orderSchema = mongoose.Schema(
       },
     ],
     shippingAddress: {
-      address: { type: String, required: true },
-      city: { type: String, required: true },
-      postalCode: { type: String, required: true },
-      country: { type: String, required: true },
+      address: { type: String, required: false },
+      city: { type: String, required: false },
+      postalCode: { type: String, required: false },
+      country: { type: String, required: false },
     },
     paymentMethod: { // the idea behind this is to make the app scalable
       type: String,
-      required: true,
+      required: false,
     },
     paymentResult: { // this data comes from paypal
       id: { type: String },
@@ -50,7 +52,7 @@ const orderSchema = mongoose.Schema(
     },
     shippingPrice: { // this is not necessary
       type: Number,
-      required: true,
+      required: false,
       default: 0.0,
     },
     totalPrice: {
