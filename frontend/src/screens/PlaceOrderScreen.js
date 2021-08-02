@@ -24,7 +24,7 @@ const PlaceOrderScreen = ({ history }) => {
   const orderCreate = useSelector((state) => state.orderCreate);
   const { order, success, error } = orderCreate;
 
-  // use effect validates changes in the states and reloads when detected
+  // use effect validates changes in the state and reloads when detected
   useEffect(() => {
     if (success) {
       history.push(`/order/${order._id}`); // we move to the order id page

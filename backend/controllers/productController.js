@@ -7,10 +7,26 @@ import Product from "../models/productModel.js"; // PRODUCT MODEL
 const getProducts = asyncHandler(async (req, res) => {
   const keyword = req.query.keyword
     ? {
-        name: {
-          $regex: req.query.keyword,
-          $options: "i",
-        },
+        $or: [
+          {
+            name: {
+              $regex: req.query.keyword,
+              $options: "i",
+            },
+          },
+          {
+            brand: {
+              $regex: req.query.keyword,
+              $options: "i",
+            },
+          },
+          {
+            category: {
+              $regex: req.query.keyword,
+              $options: "i",
+            },
+          },
+        ],
       }
     : {};
 

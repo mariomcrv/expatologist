@@ -28,7 +28,7 @@ export const listProducts = (keyword = '') => async (dispatch) => {
   try {
     dispatch({ type: PRODUCT_LIST_REQUEST }); // we pass an object and the type is the request, check the reducer file to see what it does
 
-    const { data } = await axios.get(`api/products?keyword=${keyword}`); // this call should give me the data
+    const { data } = await axios.get(`/api/products?keyword=${keyword}`); // this call should give me the data
 
     // at this moment we dispatch the data with an object, once the data is loaded
     dispatch({

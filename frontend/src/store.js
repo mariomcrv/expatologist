@@ -16,6 +16,7 @@ import { userLoginReducer, userRegisterReducer, userDetailsReducer } from "./red
 import {
   orderCreateReducer,
   orderListMyReducer,
+  orderListReducer,
 } from "./reducers/orderReducers";
 
 const reducer = combineReducers({
@@ -27,6 +28,7 @@ const reducer = combineReducers({
   userDetails: userDetailsReducer,
   orderCreate: orderCreateReducer,
   orderListMy: orderListMyReducer,
+  orderList: orderListReducer,
 }); // here we pass our reducers, check it is formatted as an object
 
 // with this const we can bring the content from cart in our localstorage, parse it into a string and put it into my initial state
