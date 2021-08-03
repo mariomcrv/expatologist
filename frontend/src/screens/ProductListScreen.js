@@ -2,7 +2,12 @@ import React, { useEffect } from "react";
 import { LinkContainer } from "react-router-bootstrap";
 import { Table, Button, Row, Col, Alert, Spinner } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { listProducts, deleteProduct } from "../actions/productActions";
+import {
+  listProducts,
+  deleteProduct,
+  createProduct,
+} from "../actions/productActions";
+import { PRODUCT_CREATE_RESET } from "../constants/productConstants";
 
 const ProductListScreen = ({ history, match }) => {
   const dispatch = useDispatch();
@@ -10,23 +15,44 @@ const ProductListScreen = ({ history, match }) => {
   const productList = useSelector((state) => state.productList);
   const { loading, error, products } = productList;
 
-  const productDelete = useSelector((state) => state.productDelete)
+  const productDelete = useSelector((state) => state.productDelete);
   const {
     loading: loadingDelete,
     error: errorDelete,
     success: successDelete,
-  } = productDelete
+  } = productDelete;
+
+  const productCreate = useSelector((state) => state.productCreate)
+  const {
+    loading: loadingCreate,
+    error: errorCreate,
+    success: successCreate,
+    product: createdProduct,
+  } = productCreate
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
   useEffect(() => {
-    if (userInfo && userInfo.isAdmin) {
-      dispatch(listProducts());
-    } else {
-      history.push("/login"); // if the user is not logged in, send to login screen
+    dispatch({ type: PRODUCT_CREATE_RESET }); // this will reset the state
+
+    if (!userInfo.isAdmin) {
+      history.push("/login");
     }
-  }, [dispatch, history, userInfo, successDelete]); // check changes in these dependencies
+
+    if (successCreate) {
+      history.push(`/admin/product/${createdProduct._id}/edit`);
+    } else {
+      dispatch(listProducts());
+    }
+  }, [
+    dispatch,
+    history,
+    userInfo,
+    successDelete,
+    successCreate,
+    createdProduct,
+  ]); // check changes in these dependencies
 
   // delete handler
   const deleteHandler = (id) => {
@@ -38,7 +64,7 @@ const ProductListScreen = ({ history, match }) => {
 
   // create handler
   const createProductHandler = (product) => {
-    // CREATE PRODUCT
+    dispatch(createProduct())
   };
 
   return (
@@ -55,6 +81,8 @@ const ProductListScreen = ({ history, match }) => {
       </Row>
       {loadingDelete && <Spinner />}
       {errorDelete && <Alert variant='danger'>{errorDelete}</Alert>}
+      {loadingCreate && <Spinner />}
+      {errorCreate && <Alert variant='danger'>{errorCreate}</Alert>}
       {loading ? (
         <Spinner />
       ) : error ? (
