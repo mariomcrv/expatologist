@@ -3,6 +3,13 @@ export const ORDER_CREATE_SUCCESS = 'ORDER_CREATE_SUCCESS'
 export const ORDER_CREATE_FAIL = 'ORDER_CREATE_FAIL'
 export const ORDER_CREATE_RESET = 'ORDER_CREATE_RESET' // this is to reset the status in the order creation
 
+// constants to retreive the orders by id
+
+// constants to retreive orders
+export const ORDER_DETAILS_REQUEST = 'ORDER_DETAILS_REQUEST'
+export const ORDER_DETAILS_SUCCESS = 'ORDER_DETAILS_SUCCESS'
+export const ORDER_DETAILS_FAIL = 'ORDER_DETAILS_FAIL'
+
 
 // constants to retreive orders
 export const ORDER_LIST_MY_REQUEST = 'ORDER_LIST_MY_REQUEST'

@@ -117,7 +117,7 @@ const PlaceOrderScreen = ({ history }) => {
               className='btn-block'
               onClick={placeOrderHandler}
             >
-              Place Order!
+              Book appointment!
             </Button>
           </ListGroup.Item>
         </ListGroup>
