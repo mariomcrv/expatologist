@@ -60,7 +60,7 @@ const ProductScreen = ({ history, match }) => {
         // else
         <Row>
           <Col md={3}>
-            <Image src={product.image} alt={product.name} fluid></Image>
+            <Image src={product.image} alt={product.name} fluid className="rounded-circle"></Image>
           </Col>
           <Col md={5}>
             <ListGroup variant='flush'>

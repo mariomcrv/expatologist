@@ -68,12 +68,12 @@ const productSchema = mongoose.Schema(
     // rating is gonna be the average of the review ratings
     rating: {
       type: Number,
-      required: true,
+      required: false,
       default: 0,
     },
     numReviews: { // optional
       type: Number,
-      required: true,
+      required: false,
       default: 0,
     },
     price: { // cost per sesion
@@ -83,7 +83,7 @@ const productSchema = mongoose.Schema(
     },
     countInStock: { // can change for availability instead of stock
       type: Number,
-      required: true,
+      required: false,
       default: 0,
     },
   },

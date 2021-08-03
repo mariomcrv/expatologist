@@ -11,6 +11,7 @@ import RegisterScreen from "./screens/RegisterScreen";
 import PlaceOrderScreen from "./screens/PlaceOrderScreen";
 import OrdersScreen from "./screens/OrdersScreen";
 import OrderListScreen from "./screens/OrderListScreen";
+import ProductListScreen from "./screens/ProductListScreen";
 
 // this is where I put the routes of the different screens
 
@@ -26,6 +27,7 @@ const App = () => {
           <Route path='/orders' component={OrdersScreen} />
           <Route path='/product/:id' component={ProductScreen} />
           <Route path='/cart/:id?' component={CartScreen} />
+          <Route path='/admin/productlist' component={ProductListScreen} />
           <Route path='/admin/orderList' component={OrderListScreen} />
           <Route path='/search/:keyword' component={HomeScreen} exact />
           <Route path='/' component={HomeScreen} exact />

@@ -13,7 +13,11 @@ import {
   PRODUCT_DETAILS_REQUEST,
   PRODUCT_DETAILS_SUCCESS,
   PRODUCT_DETAILS_FAIL,
+  PRODUCT_DELETE_REQUEST,
+  PRODUCT_DELETE_SUCCESS,
+  PRODUCT_DELETE_FAIL,
 } from "../constants/productConstants";
+import { logout } from "./userActions";
 
 // we need to export the actions
 // this action is going to do what we did in the home screen component, fetch information about the therapitst form the api
@@ -24,35 +28,38 @@ import {
 
 // -- THERAPIST LIST ACTION --
 
-export const listProducts = (keyword = '') => async (dispatch) => {
-  try {
-    dispatch({ type: PRODUCT_LIST_REQUEST }); // we pass an object and the type is the request, check the reducer file to see what it does
+export const listProducts =
+  (keyword = "") =>
+  async (dispatch) => {
+    try {
+      dispatch({ type: PRODUCT_LIST_REQUEST }); // we pass an object and the type is the request, check the reducer file to see what it does
 
-    const { data } = await axios.get(`/api/products?keyword=${keyword}`); // this call should give me the data
+      const { data } = await axios.get(`/api/products?keyword=${keyword}`); // this call should give me the data
 
-    // at this moment we dispatch the data with an object, once the data is loaded
-    dispatch({
-      type: PRODUCT_LIST_SUCCESS,
-      payload: data,
-    });
+      // at this moment we dispatch the data with an object, once the data is loaded
+      dispatch({
+        type: PRODUCT_LIST_SUCCESS,
+        payload: data,
+      });
 
-    // on error. We send an object back, the payload is the error message
-    // since I have custom error handling, I will send back the custom message
-    // on the other hand, send the actual error message
-  } catch (error) {
-    dispatch({
-      type: PRODUCT_LIST_FAIL,
-      payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message,
-    });
-  }
-};
+      // on error. We send an object back, the payload is the error message
+      // since I have custom error handling, I will send back the custom message
+      // on the other hand, send the actual error message
+    } catch (error) {
+      dispatch({
+        type: PRODUCT_LIST_FAIL,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      });
+    }
+  };
 
 // -- THERAPIST DETAILS ACTION
 
-export const listProductDetails = (id) => async (dispatch) => { // when this action is called, it takes an id as a parameter
+export const listProductDetails = (id) => async (dispatch) => {
+  // when this action is called, it takes an id as a parameter
   try {
     dispatch({ type: PRODUCT_DETAILS_REQUEST }); // we pass an object and the type is the request, check the reducer file to see what it does
 
@@ -70,6 +77,40 @@ export const listProductDetails = (id) => async (dispatch) => { // when this act
   } catch (error) {
     dispatch({
       type: PRODUCT_DETAILS_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+// delete product action
+
+export const deleteProduct = (id) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: PRODUCT_DELETE_REQUEST,
+    });
+
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+
+    await axios.delete(`/api/products/${id}`, config);
+
+    dispatch({
+      type: PRODUCT_DELETE_SUCCESS,
+    });
+  } catch (error) {
+    dispatch({
+      type: PRODUCT_DELETE_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
