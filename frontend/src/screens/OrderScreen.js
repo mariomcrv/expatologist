@@ -9,6 +9,8 @@ import {
   Alert,
   ListGroupItem,
   Spinner,
+  Container,
+  Table,
 } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { getOrderDetails } from "../actions/orderActions";
@@ -18,7 +20,7 @@ const OrderScreen = ({ match }) => {
 
   const dispatch = useDispatch();
 
-  const orderDetails = useSelector((state) => state.orderDetails); // extract infro from the state
+  const orderDetails = useSelector((state) => state.orderDetails); // extract info from the state
   const { order, loading, error } = orderDetails;
 
   useEffect(() => {
@@ -31,10 +33,29 @@ const OrderScreen = ({ match }) => {
     <Alert variant='danger'>{error}</Alert>
   ) : (
     <>
-    <h1>Happy days!</h1>
-    <h3>Your appointment is confirmed</h3>
-      <p>Order: {order._id}</p>
-      <p>User: {order.user.name}</p>
+      <Container className='text-center'>
+        <h1>Happy days!</h1>
+        <h3>{order.user.name}, Your appointment is confirmed</h3>
+        <p>Order: {order._id}</p>
+      </Container>
+      <Table striped bordered hover responsive>
+        <thead>
+          <tr>
+            <th>Counsellor</th>
+            <th>Date</th>
+            <th>Time</th>
+          </tr>
+        </thead>
+        <tbody>
+          {order.orderItems.map((item) => (
+            <tr>
+              <td>{item.name}</td>
+              <td>{item.date}</td>
+              <td>{item.time}</td>
+            </tr>
+          ))}
+        </tbody>
+      </Table>
     </>
   );
 };
