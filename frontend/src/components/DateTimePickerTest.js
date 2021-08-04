@@ -3,7 +3,7 @@ import {
   DatePickerComponent,
   TimePickerComponent,
 } from "@syncfusion/ej2-react-calendars";
-import "./DateTimePicker.css";
+// import "./DateTimePicker.css";
 
 const DateTimePickerTest = (props) => {
   // i need use state to change the behavior of the button

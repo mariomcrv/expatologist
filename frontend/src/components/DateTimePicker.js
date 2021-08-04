@@ -3,7 +3,7 @@ import {
   DatePickerComponent,
   TimePickerComponent,
 } from "@syncfusion/ej2-react-calendars";
-import "./DateTimePicker.module.css";
+import "http://cdn.syncfusion.com/ej2/material.css";
 
 export const DateTimePicker = () => {
 
