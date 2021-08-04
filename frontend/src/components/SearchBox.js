@@ -23,7 +23,7 @@ const SearchBox = ({ history }) => {
         placeholder='Find a Counsellor...'
         className='mr-sm-2 ml-sm-5 rounded-pill'
       ></Form.Control>
-      <Button type='submit' variant='outline-light' className='btn p-2 rounded-circle'><i className='fas fa-search'></i>
+      <Button type='submit' variant='outline-light' className='btn p-2 rounded-circle'> GO!! 
       </Button>
     </Form>
     </div>

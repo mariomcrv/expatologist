@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Form, Button, Alert, Spinner } from "react-bootstrap";
+import { Form, Button, Alert, Spinner, InputGroup } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import FormContainer from "../components/FormContainer";
 import { listProductDetails, updateProduct } from "../actions/productActions";
@@ -52,11 +52,11 @@ const ProductEditScreen = ({ match, history }) => {
     }
   }, [dispatch, history, productId, product, successUpdate]);
 
-
   // on submit
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(updateProduct({
+    dispatch(
+      updateProduct({
         _id: productId,
         name,
         price,
@@ -64,7 +64,8 @@ const ProductEditScreen = ({ match, history }) => {
         brand,
         category,
         description,
-    }))
+      })
+    );
   };
 
   return (
@@ -99,17 +100,22 @@ const ProductEditScreen = ({ match, history }) => {
                 placeholder='Enter price'
                 value={price}
                 onChange={(e) => setPrice(e.target.value)}
+                required
               ></Form.Control>
             </Form.Group>
 
             <Form.Group controlId='image'>
               <Form.Label>Image</Form.Label>
-              <Form.Control
-                type='text'
-                placeholder='Enter image url'
-                value={image}
-                onChange={(e) => setImage(e.target.value)}
-              ></Form.Control>
+                <Form.Control
+                  type='text'
+                  placeholder='Enter image url'
+                  value={image}
+                  onChange={(e) => setImage(e.target.value)}
+                  required
+                />
+                <Form.Control.Feedback type="invalid">
+                  Please provide a url.
+                </Form.Control.Feedback>
             </Form.Group>
 
             <Form.Group controlId='brand'>

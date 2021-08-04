@@ -25,7 +25,7 @@ const OrderScreen = ({ match }) => {
 
   useEffect(() => {
     dispatch(getOrderDetails(orderId)); // bring the order data
-  }, []);
+  }, [dispatch, orderId]);
 
   return loading ? (
     <Spinner />
