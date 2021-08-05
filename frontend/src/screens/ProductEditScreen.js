@@ -34,6 +34,7 @@ const ProductEditScreen = ({ match, history }) => {
     // if update info is ok, we move to the counsellors list
     if (successUpdate) {
       dispatch({ type: PRODUCT_UPDATE_RESET });
+      
       history.push("/admin/productlist");
       // else, do the second check
     } else {
