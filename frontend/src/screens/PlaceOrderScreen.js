@@ -1,4 +1,6 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { PayPalButton } from "react-paypal-button-v2";
 import {
   Button,
   Row,
@@ -8,6 +10,7 @@ import {
   Card,
   Alert,
   ListGroupItem,
+  Spinner,
 } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { createOrder } from "../actions/orderActions";
@@ -15,6 +18,9 @@ import { ORDER_CREATE_RESET } from "../constants/orderConstants";
 
 const PlaceOrderScreen = ({ history }) => {
   const cart = useSelector((state) => state.cart);
+
+  // paypal sdk
+  const [sdkReady, setSdkReady] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -24,8 +30,22 @@ const PlaceOrderScreen = ({ history }) => {
   const orderCreate = useSelector((state) => state.orderCreate);
   const { order, success, error } = orderCreate;
 
-  // use effect validates changes in the state and reloads when detected
+  // use effect, thing to do when the page loads and changes validates changes in the state and reloads when detected
   useEffect(() => {
+    const addPayPalScript = async () => {
+      const { data: clientId } = await axios.get('/api/config/paypal')
+      const script = document.createElement('script')
+      script.type = 'text/javascript'
+      script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}&currency=EUR`
+      script.async = true
+      script.onload = () => {
+        setSdkReady(true)
+      }
+      document.body.appendChild(script)
+    }
+
+    addPayPalScript();
+
     if (success) {
       history.push(`/order/${order._id}`); // we move to the order id page
       dispatch({ type: ORDER_CREATE_RESET }); // this changes the status of the order and allow us to create more orders
@@ -58,6 +78,18 @@ const PlaceOrderScreen = ({ history }) => {
   cart.totalPrice = (Number(cart.itemsPrice) + Number(cart.taxPrice)).toFixed(
     2
   );
+
+  const successPaymentHandler = (paymentResult) => {
+    console.log(paymentResult);
+    dispatch(
+      createOrder({
+        orderItems: cart.cartItems,
+        itemsPrice: cart.itemsPrice,
+        taxPrice: cart.taxPrice,
+        totalPrice: cart.totalPrice,
+      })
+    );
+  };
 
   return (
     <Row>
@@ -112,6 +144,17 @@ const PlaceOrderScreen = ({ history }) => {
           </ListGroupItem>
           <ListGroup.Item>{error && <Alert>{error}</Alert>}</ListGroup.Item>
           <ListGroup.Item>
+            {!sdkReady ? (
+              <Spinner />
+            ) : (
+              <PayPalButton
+                amount={cart.totalPrice}
+                currency='EUR'
+                onSuccess={successPaymentHandler}
+              />
+            )}
+          </ListGroup.Item>
+          {/* <ListGroup.Item>
             <Button
               type='button'
               className='btn-block'
@@ -119,7 +162,8 @@ const PlaceOrderScreen = ({ history }) => {
             >
               Book appointment!
             </Button>
-          </ListGroup.Item>
+          </ListGroup.Item> */}
+
         </ListGroup>
       </Col>
     </Row>

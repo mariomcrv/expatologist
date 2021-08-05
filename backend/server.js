@@ -12,7 +12,7 @@ import productRoutes from "./routes/productRoutes.js"; // this is how we make us
 import userRoutes from "./routes/userRoutes.js"; // import of the userRoutes
 import orderRoutes from "./routes/orderRoutes.js"; // import of the userRoutes
 
-import { notFound, errorHandler } from './middleware/errorMiddleware.js'
+import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 
 dotenv.config(); // We run this method of dotenv to load the content
 
@@ -30,6 +30,11 @@ app.use("/api/products", productRoutes);
 // --ORDER ROUTES
 // this app.se calls the function in the orderRotues files to create an order in the DB
 app.use("/api/orders", orderRoutes);
+
+// paypal route
+app.get("/api/config/paypal", (req, res) =>
+  res.send(process.env.PAYPAL_CLIENT_ID)
+); // instructions to hit paypal api
 
 // -- USER ROUTES
 app.use("/api/users", userRoutes);
