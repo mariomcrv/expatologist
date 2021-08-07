@@ -36,7 +36,7 @@ app.get("/api/config/paypal", (req, res) =>
   res.send(process.env.PAYPAL_CLIENT_ID)
 ); // instructions to hit paypal api
 
-// -- USER ROUTES
+// -- USER ROUTESC
 app.use("/api/users", userRoutes);
 
 // IMPORTANT --> THESE ARE THE ACTIONS TO FOLLOW DURING PRODUCTION

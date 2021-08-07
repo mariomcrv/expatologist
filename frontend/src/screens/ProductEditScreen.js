@@ -29,12 +29,15 @@ const ProductEditScreen = ({ match, history }) => {
     success: successUpdate,
   } = productUpdate; //deconstruct data
 
+  // validate form with useState
+  const [validated, setValidated] = useState(true);
+
   // with use effect we reload the components when certain dependencies change
   useEffect(() => {
     // if update info is ok, we move to the counsellors list
     if (successUpdate) {
       dispatch({ type: PRODUCT_UPDATE_RESET });
-      
+
       history.push("/admin/productlist");
       // else, do the second check
     } else {
@@ -51,11 +54,18 @@ const ProductEditScreen = ({ match, history }) => {
         setDescription(product.description);
       }
     }
-  }, [dispatch, history, productId, product, successUpdate]);
+  }, [dispatch, history, productId, product, successUpdate, validated]);
 
   // on submit
   const submitHandler = (e) => {
+    // prevent changes
     e.preventDefault();
+
+    // change the state
+    setValidated(true);
+
+    // e.preventDefault();
+    // dispatch the creation of the item
     dispatch(
       updateProduct({
         _id: productId,
@@ -83,15 +93,19 @@ const ProductEditScreen = ({ match, history }) => {
         ) : error ? (
           <Alert variant='danger'>{error}</Alert>
         ) : (
-          <Form onSubmit={submitHandler}>
+          <Form noValidate validated={validated} onSubmit={submitHandler}>
             <Form.Group controlId='name'>
               <Form.Label>Name</Form.Label>
               <Form.Control
                 type='name'
                 placeholder='Enter name'
                 value={name}
+                required
                 onChange={(e) => setName(e.target.value)}
               ></Form.Control>
+              <Form.Control.Feedback type='invalid'>
+                Please provide a valid name.
+              </Form.Control.Feedback>
             </Form.Group>
 
             <Form.Group controlId='price'>
@@ -103,20 +117,23 @@ const ProductEditScreen = ({ match, history }) => {
                 onChange={(e) => setPrice(e.target.value)}
                 required
               ></Form.Control>
+                    <Form.Control.Feedback type='invalid'>
+                Please provide a valid session price.
+              </Form.Control.Feedback>
             </Form.Group>
 
             <Form.Group controlId='image'>
               <Form.Label>Image</Form.Label>
-                <Form.Control
-                  type='text'
-                  placeholder='Enter image url'
-                  value={image}
-                  onChange={(e) => setImage(e.target.value)}
-                  required
-                />
-                <Form.Control.Feedback type="invalid">
-                  Please provide a url.
-                </Form.Control.Feedback>
+              <Form.Control
+                type='text'
+                placeholder='Enter image url'
+                value={image}
+                onChange={(e) => setImage(e.target.value)}
+                required
+              />
+              <Form.Control.Feedback type='invalid'>
+                Please provide a url.
+              </Form.Control.Feedback>
             </Form.Group>
 
             <Form.Group controlId='brand'>
@@ -125,8 +142,12 @@ const ProductEditScreen = ({ match, history }) => {
                 type='text'
                 placeholder='Enter country'
                 value={brand}
+                required
                 onChange={(e) => setBrand(e.target.value)}
               ></Form.Control>
+                    <Form.Control.Feedback type='invalid'>
+                Please provide a valid country.
+              </Form.Control.Feedback>
             </Form.Group>
 
             <Form.Group controlId='category'>
@@ -135,8 +156,12 @@ const ProductEditScreen = ({ match, history }) => {
                 type='text'
                 placeholder='Enter specialization'
                 value={category}
+                required
                 onChange={(e) => setCategory(e.target.value)}
               ></Form.Control>
+                    <Form.Control.Feedback type='invalid'>
+                Please provide a valid specialization.
+              </Form.Control.Feedback>
             </Form.Group>
 
             <Form.Group controlId='description'>
@@ -147,6 +172,9 @@ const ProductEditScreen = ({ match, history }) => {
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
               ></Form.Control>
+                    <Form.Control.Feedback type='invalid'>
+                Please provide a valid description.
+              </Form.Control.Feedback>
             </Form.Group>
 
             <Button type='submit' variant='primary'>
