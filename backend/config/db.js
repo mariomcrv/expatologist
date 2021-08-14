@@ -16,7 +16,7 @@ const connectDB = async () => {
 
 
     // once we are connected, we log the details of the connection
-    // at this pint the var conn has details we can log
+    // at this po0int the var conn has details we can log
     console.log(`MongoDB Connected: ${conn.connection.host}`);
 
     // now, if the connection fails, we catch the error

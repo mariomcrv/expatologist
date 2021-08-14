@@ -42,14 +42,14 @@ const ProductScreen = ({ history, match }) => {
     dispatch(listProductDetails(match.params.id));
   }, [dispatch, match]);
 
-  // with this handler I will pass the info to the cart
+  // with this handler I will pass the id, date and tieme to the cart
   const addToCartHandler = () => {
     history.push(`/cart/${match.params.id}?date=${date}?time=${time}`)
   }
 
   return (
     <>
-      <Link className='btn btn-light my-3' to='/'>
+      <Link className='btn btn-info my-3' variant='outline-primary' to='/'>
         Go Back
       </Link>
       {loading ? ( // if loading
@@ -106,7 +106,7 @@ const ProductScreen = ({ history, match }) => {
                 </ListGroup.Item>
                 <ListGroup.Item>
                   <Button
-                    className='btn-block'
+                    className='btn-block btn-success'
                     type='button'
                     disabled={disable}
                     onClick={addToCartHandler}

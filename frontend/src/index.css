@@ -4,14 +4,13 @@
 @import "../node_modules/@syncfusion/ej2-inputs/styles/material.css";
 @import "../node_modules/@syncfusion/ej2-popups/styles/material.css";
 @import "../node_modules/@syncfusion/ej2-react-calendars/styles/material.css";
-@import url('https://fonts.googleapis.com/css2?family=STIX+Two+Text&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=STIX+Two+Text&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
 h1, h2, h3 {
-  font-family: 'STIX Two Text', serif;
+  color: #5C527F;
 }
 
-p {
+body {
   font-family: 'Roboto', sans-serif;
 }
 
