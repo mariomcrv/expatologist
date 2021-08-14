@@ -2,12 +2,10 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { PayPalButton } from "react-paypal-button-v2";
 import {
-  Button,
   Row,
   Col,
   ListGroup,
   Image,
-  Card,
   Alert,
   ListGroupItem,
   Spinner,
@@ -36,6 +34,7 @@ const PlaceOrderScreen = ({ history }) => {
       const { data: clientId } = await axios.get('/api/config/paypal')
       const script = document.createElement('script')
       script.type = 'text/javascript'
+      // the currency is required after the clientId
       script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}&currency=EUR`
       script.async = true
       script.onload = () => {

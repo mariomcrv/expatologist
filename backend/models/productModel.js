@@ -1,5 +1,5 @@
 // check this out, I have TWO schemas here
-// > reviews
+// >reviews
 // >product
 // Also, rememeber, at the moment, the reviews are optional
 // they are not relevant for the main functionality of the project
@@ -25,6 +25,7 @@ const reviewSchema = mongoose.Schema(
     },
   },
   {
+  // timestamps are added automatically
     timestamps: true,
   }
 );
@@ -32,7 +33,6 @@ const reviewSchema = mongoose.Schema(
 // product schema
 const productSchema = mongoose.Schema(
   {
-      // pay attention here as well. 
       // type is an object id
       // the reference is a User
     user: {
@@ -56,7 +56,7 @@ const productSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    description: { // same
+    description: { // brief information about the counsellor
       type: String,
       required: true,
     },
@@ -81,7 +81,7 @@ const productSchema = mongoose.Schema(
       required: true,
       default: 0,
     },
-    countInStock: { // can change for availability instead of stock
+    countInStock: { // set avaliability
       type: Number,
       required: false,
       default: 0,

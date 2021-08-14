@@ -4,6 +4,9 @@ import Product from "../models/productModel.js"; // PRODUCT MODEL
 //@desc Fetch all products
 //@route GET/api/products
 //@access Public
+
+// this function returns the results from the search box in the front end
+// the OR operators allows me to search multiple fields
 const getProducts = asyncHandler(async (req, res) => {
   const keyword = req.query.keyword
     ? {
@@ -79,7 +82,9 @@ const createProduct = asyncHandler(async (req, res) => {
     image: "/images/sample.jpg",
     brand: "Sample country",
     category: "Sample specialization",
+    // field below is not necessary
     countInStock: 0,
+    // filed below might be considered for further functionality
     numReviews: 0,
     description: "Sample description",
   });
@@ -102,6 +107,7 @@ const updateProduct = asyncHandler(async (req, res) => {
     countInStock,
   } = req.body
 
+  // find the therapist by id and keep ip in a var
   const product = await Product.findById(req.params.id)
 
   if (product) {
@@ -121,4 +127,5 @@ const updateProduct = asyncHandler(async (req, res) => {
   }
 })
 
+// export functions
 export { getProducts, getProductById, deleteProduct, createProduct, updateProduct };

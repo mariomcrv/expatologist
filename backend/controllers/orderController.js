@@ -16,7 +16,7 @@ const addOrderItems = asyncHandler(async (req, res) => {
     const order = new Order({
       orderItems,
       user: req.user._id, // we will get this value through the token
-      paymentMethod,
+      paymentMethod, // this var can be implemented when more payment options are available
       itemsPrice,
       taxPrice,
       totalPrice,

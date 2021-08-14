@@ -28,7 +28,7 @@ const HomeScreen = ({match}) => {
   // else, load the components
   return (
     <>
-      <h1>International Counsellors 🌍</h1>
+      <h1 className='text-center'>International Counsellors 🌍</h1>
       {loading ? (
         <Spinner animation="grow" variant="primary" />
       ) : error ? (

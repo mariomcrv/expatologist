@@ -1,7 +1,7 @@
 {
   "name": "expatologist",
   "version": "1.0.0",
-  "description": "MERN shopping app",
+  "description": "MERN booking app",
   "main": "server.js",
   "type": "module",
   "scripts": {
