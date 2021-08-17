@@ -22,7 +22,7 @@ const userSchema = mongoose.Schema(
     },
     isAdmin: {
       // admin field
-      type: Boolean, // bollean type, yes or no, true or false
+      type: Boolean, // boolean type, yes or no, true or false
       required: true, // needed
       default: false, // the default value is false
     },

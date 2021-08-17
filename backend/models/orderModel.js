@@ -12,8 +12,6 @@ const orderSchema = mongoose.Schema(
     // this is important to check, order Item is an array []
     // we have an array of order items which is also
     // connected to the Product model
-    // in my case, I wont need an array because i just want
-    // to allow my user to book one thing at a time
     orderItems: [
       {
         name: { type: String, required: true }, 

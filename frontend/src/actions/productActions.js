@@ -27,7 +27,7 @@ import { logout } from "./userActions";
 
 // we need to export the actions
 // this action is going to do what we did in the home screen component, fetch information about the therapitst form the api
-// reducers are function and the actions are the actual magic ACTIONS!
+// reducers are functions and the actions are the actual magic ACTIONS!
 // redux-thunk allows us to create functions within functions,
 // check how after the first arrow we can add an async function.
 // dispatch is how we will dispatch the actions above

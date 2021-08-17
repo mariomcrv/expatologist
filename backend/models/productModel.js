@@ -30,7 +30,7 @@ const reviewSchema = mongoose.Schema(
   }
 );
 
-// product schema
+// Counsellors schema
 const productSchema = mongoose.Schema(
   {
       // type is an object id

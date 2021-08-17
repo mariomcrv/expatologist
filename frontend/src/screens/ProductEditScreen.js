@@ -117,7 +117,7 @@ const ProductEditScreen = ({ match, history }) => {
                 onChange={(e) => setPrice(e.target.value)}
                 required
               ></Form.Control>
-                    <Form.Control.Feedback type='invalid'>
+              <Form.Control.Feedback type='invalid'>
                 Please provide a valid session price.
               </Form.Control.Feedback>
             </Form.Group>
@@ -145,7 +145,7 @@ const ProductEditScreen = ({ match, history }) => {
                 required
                 onChange={(e) => setBrand(e.target.value)}
               ></Form.Control>
-                    <Form.Control.Feedback type='invalid'>
+              <Form.Control.Feedback type='invalid'>
                 Please provide a valid country.
               </Form.Control.Feedback>
             </Form.Group>
@@ -159,7 +159,7 @@ const ProductEditScreen = ({ match, history }) => {
                 required
                 onChange={(e) => setCategory(e.target.value)}
               ></Form.Control>
-                    <Form.Control.Feedback type='invalid'>
+              <Form.Control.Feedback type='invalid'>
                 Please provide a valid specialization.
               </Form.Control.Feedback>
             </Form.Group>
@@ -170,9 +170,10 @@ const ProductEditScreen = ({ match, history }) => {
                 type='text'
                 placeholder='Enter description'
                 value={description}
+                required
                 onChange={(e) => setDescription(e.target.value)}
               ></Form.Control>
-                    <Form.Control.Feedback type='invalid'>
+              <Form.Control.Feedback type='invalid'>
                 Please provide a valid description.
               </Form.Control.Feedback>
             </Form.Group>
